@@ -30,20 +30,35 @@ export async function widgetScoringSystem({
     validator,
   });
 
+  // Extract the path from the property shape
+  const shapePointer = grapoi({ dataset: shapesGraph, factory });
+  const pathTerm = shapePointer.node(propertyShape).out(sh("path")).term;
+
   return async function propertyShapesClosure({
     dataGraph,
     focusNode,
   }: ExecuteOptions): Promise<WidgetScore[]> {
+    // Navigate from the focus node to the actual value using the path
+    const dataPointer = grapoi({ dataset: dataGraph, factory });
+    const valueNode = pathTerm
+      ? dataPointer.node(focusNode).out(pathTerm).term
+      : undefined;
+
     const dataWidgetScores = await generateScores({
       pointer,
       source: shui("dataGraphShape"),
       // Validate the data against the scores.
       dataGraph,
-      focusNode,
+      focusNode: valueNode || focusNode,
       validator,
     });
 
-    return [...shapeWidgetScores, ...dataWidgetScores];
+    return [...shapeWidgetScores, ...dataWidgetScores].toSorted((a, b) => {
+      if (b.score === a.score) {
+        return a.widget.value.localeCompare(b.widget.value);
+      }
+      return b.score - a.score;
+    });
   };
 }
 
@@ -108,7 +123,7 @@ const generateScores = async ({
         });
       }
     } catch (error) {
-      const firstShape = sourceShapes.ptrs[0]?.term.value || 'unknown';
+      const firstShape = sourceShapes.ptrs[0]?.term.value || "unknown";
       console.error(error);
       throw new Error(
         `Error validating focus node ${focusNode.value} against score shape ${firstShape}: ${error}`,
@@ -116,10 +131,5 @@ const generateScores = async ({
     }
   }
 
-  return scores.toSorted((a, b) => {
-    if (b.score === a.score) {
-      return a.widget.value.localeCompare(b.widget.value);
-    }
-    return b.score - a.score;
-  });
+  return scores;
 };

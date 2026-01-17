@@ -1,10 +1,10 @@
 PREFIX shui: <http://www.w3.org/ns/shacl-ui#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-shui:dateTimePickerEditorScore10
+shui:dateTimePickerEditorScore30
     a shui:WidgetScore ;
     shui:dataGraphShape shui:isDateTime ;
-    shui:score 10 ;
+    shui:score 30 ;
     shui:widget shui:DateTimePickerEditor ;
 .
 

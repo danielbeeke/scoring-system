@@ -17,7 +17,8 @@ for await (const entry of Deno.readDir("./tests")) {
       const scoreQuads = await getRdf(`./tests/${entry.name}/scores.ttl`);
       for (const quad of scoreQuads) widgetScoresGraph.add(quad);
       // Also add the general score shapes so the tests can use them
-      for (const scoreShapesQuad of scoreShapes) widgetScoresGraph.add(scoreShapesQuad);
+      for (const scoreShapesQuad of scoreShapes)
+        widgetScoresGraph.add(scoreShapesQuad);
     } else {
       for (const quad of await getGeneralScores()) widgetScoresGraph.add(quad);
     }
@@ -33,7 +34,32 @@ for await (const entry of Deno.readDir("./tests")) {
       focusNode: shui("data"),
     });
 
-    const outcome = scores.map((score) => `${score.widget.value.split("#").pop()} ${score.score} ${score.source.value.split("#").pop()}`).join("\n");
-    assertEquals(outcome, Deno.readTextFileSync(`./tests/${entry.name}/outcome.txt`).trim());
+    const outputFileExists = await exists(`./tests/${entry.name}/outcome.txt`);
+
+    if (outputFileExists) {
+      const outcome = scores
+        .map(
+          (score) =>
+            `${score.widget.value.split("#").pop()} ${score.score} ${score.source.value.split("#").pop()}`,
+        )
+        .join("\n");
+      assertEquals(
+        outcome,
+        Deno.readTextFileSync(`./tests/${entry.name}/outcome.txt`).trim(),
+      );
+    }
+
+    const expectedWidgetFileExists = await exists(
+      `./tests/${entry.name}/expected-widget.txt`,
+    );
+
+    if (expectedWidgetFileExists) {
+      const expectedWidget = Deno.readTextFileSync(
+        `./tests/${entry.name}/expected-widget.txt`,
+      ).trim();
+
+      const scoredWidgets = scores[0].widget.value.split("#").pop()!;
+      assertEquals(scoredWidgets, expectedWidget);
+    }
   });
 }

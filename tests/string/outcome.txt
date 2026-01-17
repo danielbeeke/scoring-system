@@ -1,0 +1,10 @@
+TextAreaEditor 20 textAreaEditorScore20
+TextFieldWithLangEditor 11 textFieldWithLangEditorScore11Permits
+TextFieldEditor 10 textFieldEditorScore10
+URIEditor 10 uriEditorScore10
+TextAreaEditor 5 textAreaEditorScore5
+TextAreaEditor 2 textAreaEditorScore2
+LiteralViewer 1 literalViewerScore1
+DetailsEditor 0 detailsEditorScore0
+DetailsViewer 0 detailsViewerScore0
+HyperlinkViewer 0 hyperlinkViewerScore0

@@ -129,7 +129,7 @@ shui:isPlainLiteral
     a sh:NodeShape ;
     sh:nodeKind sh:Literal ;
     sh:not [ sh:datatype rdf:langString ] ;
-    # sh:not [ sh:datatype xsd:boolean ] ; Disabled as this currently breaks shacl-engine
+    sh:not [ sh:datatype xsd:boolean ] ; # Disabled as this currently breaks shacl-engine
 .
 
 shui:permitsLangStringOrString
