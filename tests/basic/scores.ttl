@@ -8,25 +8,25 @@
 #
 # shui:TextFieldEditor
 #
-shui:TextFieldEditorScore10 a shui:Score ;
+shui:TextFieldEditorScore10 a shui:WidgetScore ;
     shui:dataGraphShape shui:isNotLangString, shui:isNotBoolean ;
     shui:widget shui:TextFieldEditor ;
     shui:score 10 ;
 .
 
-shui:TextFieldEditorScore0isLangString a shui:Score ;
+shui:TextFieldEditorScore0isLangString a shui:WidgetScore ;
     shui:dataGraphShape shui:isLangString ;
     shui:widget shui:TextFieldEditor ;
     shui:score 0 ;
 .
 
-shui:TextFieldEditorScore0isBoolean a shui:Score ;
+shui:TextFieldEditorScore0isBoolean a shui:WidgetScore ;
     shui:dataGraphShape shui:isBoolean ;
     shui:widget shui:TextFieldEditor ;
     shui:score 0 ;
 .
 
-shui:TextFieldEditorScore5 a shui:Score ;
+shui:TextFieldEditorScore5 a shui:WidgetScore ;
     shui:shapesGraphShape shui:hasStringDatatype ;
     shui:widget shui:TextFieldWithLangEditor ;
     shui:score 5 ;

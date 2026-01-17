@@ -41,7 +41,7 @@ const validator = new Validator(shapesGraph, { factory });
 const filesToValidate = await getFilesToValidate();
 
 for (const filePath of filesToValidate) {
-  Deno.test(`validate WidgetScore shapes in ${filePath}`, async () => {
+  Deno.test(`Score shape: ${filePath.split("/").pop()?.replace(".ttl", "")}`, async () => {
     const dataGraph = datasetFactory.dataset();
 
     // Load the score file

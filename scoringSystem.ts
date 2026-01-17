@@ -65,7 +65,7 @@ const generateScores = async ({
     .node()
     .hasOut(shui("widget"))
     .hasOut(shui("score"))
-    .hasOut(rdf("type"), shui("Score"))
+    .hasOut(rdf("type"), shui("WidgetScore"))
     .filter(
       (scoreShape: Grapoi) =>
         !scoreShape
@@ -109,6 +109,7 @@ const generateScores = async ({
       }
     } catch (error) {
       const firstShape = sourceShapes.ptrs[0]?.term.value || 'unknown';
+      console.error(error);
       throw new Error(
         `Error validating focus node ${focusNode.value} against score shape ${firstShape}: ${error}`,
       );
