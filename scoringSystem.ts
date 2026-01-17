@@ -38,20 +38,25 @@ export async function widgetScoringSystem({
     dataGraph,
     focusNode,
   }: ExecuteOptions): Promise<WidgetScore[]> {
-    // Navigate from the focus node to the actual value using the path
-    const dataPointer = grapoi({ dataset: dataGraph, factory });
-    const valueNode = pathTerm
-      ? dataPointer.node(focusNode).out(pathTerm).term
-      : undefined;
+    const dataWidgetScores = [];
+    if (dataGraph && focusNode) {
+      // Navigate from the focus node to the actual value using the path
+      const dataPointer = grapoi({ dataset: dataGraph, factory });
+      const valueNode = pathTerm
+        ? dataPointer.node(focusNode).out(pathTerm).term
+        : undefined;
 
-    const dataWidgetScores = await generateScores({
-      pointer,
-      source: shui("dataGraphShape"),
-      // Validate the data against the scores.
-      dataGraph,
-      focusNode: valueNode || focusNode,
-      validator,
-    });
+      dataWidgetScores.push(
+        ...(await generateScores({
+          pointer,
+          source: shui("dataGraphShape"),
+          // Validate the data against the scores.
+          dataGraph,
+          focusNode: valueNode || focusNode,
+          validator,
+        })),
+      );
+    }
 
     return [...shapeWidgetScores, ...dataWidgetScores].toSorted((a, b) => {
       if (b.score === a.score) {

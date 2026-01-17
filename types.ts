@@ -9,8 +9,8 @@ export type InitializationOptions = {
 };
 
 export type ExecuteOptions = {
-  dataGraph: DatasetCore;
-  focusNode: Term;
+  dataGraph?: DatasetCore;
+  focusNode?: Term;
 };
 
 export type WidgetScore = {

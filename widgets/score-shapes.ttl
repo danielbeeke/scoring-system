@@ -3,6 +3,8 @@ PREFIX shui: <http://www.w3.org/ns/shacl-ui#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 
+# Checks on the data
+
 shui:isBlankNode
     a sh:NodeShape ;
     sh:nodeKind sh:BlankNode ;
@@ -28,6 +30,42 @@ shui:isIRI
     sh:nodeKind sh:IRI ;
 .
 
+shui:isNotLiteral
+    a sh:NodeShape ;
+    sh:not [
+        sh:nodeKind sh:Literal ;
+    ] ;
+.
+
+shui:isLangString
+    a sh:NodeShape ;
+    sh:datatype rdf:langString ;
+.
+
+shui:isHTML
+    a sh:NodeShape ;
+    sh:datatype rdf:HTML ;
+.
+
+shui:isString
+    a sh:NodeShape ;
+    sh:datatype xsd:string ;
+.
+
+shui:isPlainLiteral
+    a sh:NodeShape ;
+    sh:nodeKind sh:Literal ;
+    sh:not [ sh:datatype rdf:langString ] ;
+    sh:not [ sh:datatype xsd:boolean ] ; # Disabled as this currently breaks shacl-engine
+.
+
+shui:isAnyURI
+    a sh:NodeShape ;
+    sh:datatype xsd:anyURI ;
+.
+
+# Checks on the shapes
+
 shui:literalsAllowedAndNoDatatypeSpecified
     a sh:NodeShape ;
     sh:property
@@ -39,13 +77,6 @@ shui:literalsAllowedAndNoDatatypeSpecified
             sh:maxCount 0 ;
             sh:path sh:datatype ;
         ] ;
-.
-
-shui:isNotLiteral
-    a sh:NodeShape ;
-    sh:not [
-        sh:nodeKind sh:Literal ;
-    ] ;
 .
 
 shui:hasInConstraint
@@ -64,11 +95,6 @@ shui:hasClassConstraint
     ] ;
 .
 
-shui:isHTML
-    a sh:NodeShape ;
-    sh:datatype rdf:HTML ;
-.
-
 shui:isSingleLineTrue
     a sh:NodeShape ;
     sh:property [
@@ -83,11 +109,6 @@ shui:isSingleLineFalse
         sh:path sh:singleLine ;
         sh:hasValue false ;
     ] ;
-.
-
-shui:isString
-    a sh:NodeShape ;
-    sh:datatype xsd:string ;
 .
 
 shui:permitsString
@@ -112,11 +133,6 @@ shui:hasCustomDatatype
     ] ;
 .
 
-shui:isLangString
-    a sh:NodeShape ;
-    sh:datatype rdf:langString ;
-.
-
 shui:permitsLangString
     a sh:NodeShape ;
     sh:property [
@@ -125,11 +141,15 @@ shui:permitsLangString
     ] ;
 .
 
-shui:isPlainLiteral
+
+shui:permitsNotLiteral
     a sh:NodeShape ;
-    sh:nodeKind sh:Literal ;
-    sh:not [ sh:datatype rdf:langString ] ;
-    sh:not [ sh:datatype xsd:boolean ] ; # Disabled as this currently breaks shacl-engine
+    sh:not [
+        sh:property [
+            sh:path sh:nodeKind ;
+            sh:hasValue sh:Literal ;
+        ] ;
+    ] ;
 .
 
 shui:permitsLangStringOrString
@@ -160,11 +180,6 @@ shui:hasNoClassConstraint
     sh:not shui:hasClassConstraint ;
 .
 
-shui:isAnyURI
-    a sh:NodeShape ;
-    sh:datatype xsd:anyURI ;
-.
-
 shui:hasImageFileExtension
     a sh:NodeShape ;
     sh:property [
@@ -178,5 +193,13 @@ shui:hasImageFileExtension
         ) ;
         sh:pattern "\.(jpg|jpeg|png|gif|bmp|svg|webp|avif)$" ;
         sh:flags "i" ;
+    ] ;
+.
+
+shui:constrainsNodeKindToIRI
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sh:nodeKind ;
+        sh:hasValue sh:IRI ;
     ] ;
 .

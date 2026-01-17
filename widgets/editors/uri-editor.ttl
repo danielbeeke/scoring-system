@@ -4,7 +4,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 shui:uriEditorScore10
     a shui:WidgetScore ;
     shui:dataGraphShape shui:isIRI ;
-    shui:shapesGraphShape shui:isIRI, shui:hasNoClassConstraint ;
+    shui:shapesGraphShape shui:constrainsNodeKindToIRI, shui:hasNoClassConstraint ;
     shui:score 10 ;
     shui:widget shui:URIEditor ;
 .

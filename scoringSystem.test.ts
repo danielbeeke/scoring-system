@@ -9,9 +9,11 @@ import { getGeneralScores, scoreShapes } from "./helpers/getGeneralScores.ts";
 for await (const entry of Deno.readDir("./tests")) {
   if (!entry.isDirectory) continue;
 
-  Deno.test(entry.name, async () => {
+  const functionToCall = entry.name.includes("only") ? Deno.test.only : Deno.test;
+
+  functionToCall(entry.name, async () => {
     const shapesGraph = await getRdf(`./tests/${entry.name}/shape.ttl`);
-    const dataGraph = await getRdf(`./tests/${entry.name}/data.ttl`);
+    const dataGraph = await exists(`./tests/${entry.name}/data.ttl`) ? await getRdf(`./tests/${entry.name}/data.ttl`) : undefined;
     const widgetScoresGraph = datasetFactory.dataset();
     if (await exists(`./tests/${entry.name}/scores.ttl`)) {
       const scoreQuads = await getRdf(`./tests/${entry.name}/scores.ttl`);
@@ -31,7 +33,7 @@ for await (const entry of Deno.readDir("./tests")) {
 
     const scores = await propertyShapesClosure({
       dataGraph,
-      focusNode: shui("data"),
+      focusNode: dataGraph ? shui("data") : undefined,
     });
 
     const outputFileExists = await exists(`./tests/${entry.name}/outcome.txt`);
@@ -60,6 +62,12 @@ for await (const entry of Deno.readDir("./tests")) {
 
       const scoredWidgets = scores[0].widget.value.split("#").pop()!;
       assertEquals(scoredWidgets, expectedWidget);
+    }
+
+    if (!outputFileExists && !expectedWidgetFileExists) {
+      console.warn(
+        `No outcome.txt or expected-widget.txt found for test ${entry.name}, skipping assertions.`,
+      );
     }
   });
 }
