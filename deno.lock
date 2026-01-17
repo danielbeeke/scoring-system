@@ -1,0 +1,239 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@std/assert@*": "1.0.16",
+    "jsr:@std/assert@^1.0.16": "1.0.16",
+    "jsr:@std/internal@^1.0.12": "1.0.12",
+    "npm:@rdfjs/data-model@^2.1.1": "2.1.1",
+    "npm:@rdfjs/dataset@^2.0.2": "2.0.2",
+    "npm:@rdfjs/namespace@^2.0.1": "2.0.1",
+    "npm:@rdfjs/term-map@^2.0.2": "2.0.2",
+    "npm:@rdfjs/term-set@^2.0.3": "2.0.3",
+    "npm:@rdfjs/to-ntriples@^3.0.1": "3.0.1",
+    "npm:@rdfjs/types@^2.0.1": "2.0.1",
+    "npm:@types/rdfjs__data-model@^2.0.9": "2.0.9",
+    "npm:@types/rdfjs__dataset@^2.0.7": "2.0.7",
+    "npm:@types/rdfjs__namespace@^2.0.10": "2.0.10",
+    "npm:@types/rdfjs__term-set@^2.0.9": "2.0.9",
+    "npm:grapoi@^1.1.3": "1.1.3",
+    "npm:lodash@^4.17.21": "4.17.21",
+    "npm:n3@^2.0.1": "2.0.1",
+    "npm:rdf-literal@2": "2.0.0",
+    "npm:rdf-validation@~0.1.1": "0.1.1"
+  },
+  "jsr": {
+    "@std/assert@1.0.16": {
+      "integrity": "6a7272ed1eaa77defe76e5ff63ca705d9c495077e2d5fd0126d2b53fc5bd6532",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/internal@1.0.12": {
+      "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
+    }
+  },
+  "npm": {
+    "@rdfjs/data-model@2.1.1": {
+      "integrity": "sha512-6mcOI4DjIPS6MOZw23H8oAdujHCk5gippVNQ7mKwliYTvTNh+uqRM91B9OLqhoAoNcQ3t49Dx2ooIMRG9/6ooA==",
+      "bin": true
+    },
+    "@rdfjs/dataset@2.0.2": {
+      "integrity": "sha512-6YJx+5n5Uxzq9dd9I0GGcIo6eopZOPfcsAfxSGX5d+YBzDgVa1cbtEBFnaPyPKiQsOm4+Cr3nwypjpg02YKPlA==",
+      "bin": true
+    },
+    "@rdfjs/namespace@2.0.1": {
+      "integrity": "sha512-U85NWVGnL3gWvOZ4eXwUcv3/bom7PAcutSBQqmVWvOaslPy+kDzAJCH1WYBLpdQd4yMmJ+bpJcDl9rcHtXeixg==",
+      "dependencies": [
+        "@rdfjs/data-model"
+      ]
+    },
+    "@rdfjs/term-map@2.0.2": {
+      "integrity": "sha512-EJ2FmmdEUsSR/tU1nrizRLWzH24YzhuvesrbUWxC3Fs0ilYNdtTbg0RaFJDUnJF3HkbNBQe8Zrt/uvU/hcKnHg==",
+      "dependencies": [
+        "@rdfjs/to-ntriples"
+      ]
+    },
+    "@rdfjs/term-set@2.0.3": {
+      "integrity": "sha512-DyXrKWEx+mtAFUZVU7bc3Va6/KZ8PsIp0RVdyWT9jfDgI/HCvNisZaBtAcm+SYTC45o+7WLkbudkk1bfaKVB0A==",
+      "dependencies": [
+        "@rdfjs/to-ntriples"
+      ]
+    },
+    "@rdfjs/to-ntriples@3.0.1": {
+      "integrity": "sha512-gjoPAvh4j7AbGMjcDn/8R4cW+d/FPtbfbMM0uQXkyfBFtNUW2iVgrqsgJ65roLc54Y9A2TTFaeeTGSvY9a0HCQ=="
+    },
+    "@rdfjs/types@2.0.1": {
+      "integrity": "sha512-uyAzpugX7KekAXAHq26m3JlUIZJOC0uSBhpnefGV5i15bevDyyejoB7I+9MKeUrzXD8OOUI3+4FeV1wwQr5ihA==",
+      "dependencies": [
+        "@types/node"
+      ]
+    },
+    "@types/node@18.19.130": {
+      "integrity": "sha512-GRaXQx6jGfL8sKfaIDD6OupbIHBr9jv7Jnaml9tB7l4v068PAOXqfcujMMo5PhbIs6ggR1XODELqahT2R8v0fg==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
+    "@types/rdfjs__data-model@2.0.9": {
+      "integrity": "sha512-rgQSlM9jr7XMZdC0xUIr0zsxf5FvdB4cxxzv+MlHm6uJGip5qi0q+BluNhakAzaM2I56nKLDqSE3I/XuOaHGnA==",
+      "dependencies": [
+        "@rdfjs/types"
+      ]
+    },
+    "@types/rdfjs__dataset@2.0.7": {
+      "integrity": "sha512-+GaYIL9C7N1N0HyH+obU4IXuL7DX+fXuf827aUQ2Vx2UghO47+OTxo2v3seEQj/1YHoHBfQFk5Y4P6Q7Ht4Hqw==",
+      "dependencies": [
+        "@rdfjs/types"
+      ]
+    },
+    "@types/rdfjs__namespace@2.0.10": {
+      "integrity": "sha512-xoVzEIOxcpyteEmzaj94MSBbrBFs+vqv05joMhzLEiPRwsBBDnhkdBCaaDxR1Tf7wOW0kB2R1IYe4C3vEBFPgA==",
+      "dependencies": [
+        "@rdfjs/types"
+      ]
+    },
+    "@types/rdfjs__term-set@2.0.9": {
+      "integrity": "sha512-RRXs5DwFGanZyT705f7KLSiN68gUVUtGWTp508CXJhLfD7AWmilqc1BLgLUoac48h3pnh9w5lRhwFm6fj1ZE5Q==",
+      "dependencies": [
+        "@rdfjs/types"
+      ]
+    },
+    "abort-controller@3.0.0": {
+      "integrity": "sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==",
+      "dependencies": [
+        "event-target-shim"
+      ]
+    },
+    "base64-js@1.5.1": {
+      "integrity": "sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA=="
+    },
+    "buffer@6.0.3": {
+      "integrity": "sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==",
+      "dependencies": [
+        "base64-js",
+        "ieee754"
+      ]
+    },
+    "event-target-shim@5.0.1": {
+      "integrity": "sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ=="
+    },
+    "events@3.3.0": {
+      "integrity": "sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q=="
+    },
+    "grapoi@1.1.3": {
+      "integrity": "sha512-3Qi6hJG6P+m6YhOkpe2N60z0a7/nHW7FCcx1PqzBMydpsoQ0gerba5hLTnN4bDz+5rLtIK0LbBQzWdYLBQ39ug==",
+      "dependencies": [
+        "@rdfjs/namespace",
+        "@rdfjs/term-set"
+      ]
+    },
+    "ieee754@1.2.1": {
+      "integrity": "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="
+    },
+    "lodash@4.17.21": {
+      "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+    },
+    "n3@2.0.1": {
+      "integrity": "sha512-Q6TPsTrlEoELXQ47tSBYcAZ800PQN9gtSImRUqQYoBq+Q7riIUAoDgf3tuMv6PuwonO86SBIx5GfOxvS4A/4kw==",
+      "dependencies": [
+        "buffer",
+        "readable-stream"
+      ]
+    },
+    "process@0.11.10": {
+      "integrity": "sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A=="
+    },
+    "rdf-data-factory@2.0.2": {
+      "integrity": "sha512-WzPoYHwQYWvIP9k+7IBLY1b4nIDitzAK4mA37WumAF/Cjvu/KOtYJH9IPZnUTWNSd5K2+pq4vrcE9WZC4sRHhg==",
+      "dependencies": [
+        "@rdfjs/types"
+      ]
+    },
+    "rdf-literal@2.0.0": {
+      "integrity": "sha512-jlQ+h7EvnXmncmk8OzOYR8T3gNfd4g0LQXbflHkEkancic8dh0Tdt5RiRq8vUFndjIeNHt1RWeA5TAj6rgrtng==",
+      "dependencies": [
+        "rdf-data-factory"
+      ]
+    },
+    "rdf-validation@0.1.1": {
+      "integrity": "sha512-z2RbRcsKOM+CWa7qoI4LWCQQTji64eoBNLvbP3++0ZE4pO4EP1xkV5asSH4TULeLfDEuMhzyDXRnAjA+8R2l4w==",
+      "dependencies": [
+        "@rdfjs/data-model",
+        "@rdfjs/namespace",
+        "@rdfjs/term-map",
+        "@rdfjs/to-ntriples"
+      ]
+    },
+    "readable-stream@4.7.0": {
+      "integrity": "sha512-oIGGmcpTLwPga8Bn6/Z75SVaH1z5dUut2ibSyAMVhmUggWpmDn2dapB0n7f8nwaSiRtepAsfJyfXIO5DCVAODg==",
+      "dependencies": [
+        "abort-controller",
+        "buffer",
+        "events",
+        "process",
+        "string_decoder"
+      ]
+    },
+    "safe-buffer@5.2.1": {
+      "integrity": "sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ=="
+    },
+    "string_decoder@1.3.0": {
+      "integrity": "sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==",
+      "dependencies": [
+        "safe-buffer"
+      ]
+    },
+    "undici-types@5.26.5": {
+      "integrity": "sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA=="
+    }
+  },
+  "remote": {
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/Validator.js": "0c87b9c73794fe78e8be693a5f791e3360189de37cc76eeb6133172717aa1f4f",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/index.js": "be4fd002fe2a8b539014588961af1afdd7ddec5792f11ef5806e243a2e9f457d",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/Context.js": "d990ad78d1a7edf2530675dc1815c829f4f66d66187238ae4484c67872957024",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/Registry.js": "6b40fefaaa10382606c76ada87b4e27607bcb157a28e8dedb4c56c2a8d0eadd4",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/Report.js": "14c70b76105e3922e9da57f41e3b9b639696d61399a92a75d8f35d11846d4ec7",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/Result.js": "3b803d27591a38520f02e85b1a787cf51e642c5d3611c92899b03587e67559d6",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/Shape.js": "68c2d9fdde0389ab3e93254e1907945c7a006c118a2a7142b1c9736d87fadc67",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/ShapeValidator.js": "826dc1c14225e9da4456876e1e30fd6470144174f2fde51309e5a72009bd9ef2",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/TargetResolver.js": "48b9666d11f56a70ec45dc87efe1e1aaf671771f12c87ec02e60a1d3de152cb7",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/TargetResolverRegistry.js": "a420bacd1f6af6e2c8adcd785ad2e60dd2811baf7903183a2d13ee8c4838020a",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/async.js": "ac0b0aa2501a3d67c7e4395a2bbd1999e5a575f8612712a8f2ab473397088a45",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/compareTerms.js": "617ac8d033c898b9bc166dd99f34ec4562682ebd0349e42264364ab2bfab719d",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/namespaces.js": "ad85cb2c97446c0bda0894bdcc411eda9000f8a66a60e45331b7b36d0a5bfc91",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/parsePath.js": "456acdd956221e22de834fc65953a4d35297e7c54535b24d140e8e0170e91400",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/pathsToString.js": "d7a7f1905935dd9893ab1c30759f66dd98d2822cf4733409bf78c4e790c558ee",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/resolveClasses.js": "94614b400d0ea9a30921f27103dc112bfc65bcc33c919e2f6db2b9e0d58ec5f7",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations.js": "3883430e0cee27995c65a7416dd09bab0ff63277503378a906374b3ac6e0fdb2",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/cardinality.js": "bcb62b56abfb210a8b52774558115be68fedbae3474fec7fbd27ad98ef42374f",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/logical.js": "c9c3498f659dbcd3be36a8983ece5653988b1813b9a129505bac86546972bae7",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/other.js": "d7ff051cf9f25382f279331692dc38132d7051c2d2e37947f1c4848b6a62505f",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/pair.js": "2a115d56de9791faccbf71443bacee5b6a3d7f4cf7740115627f46afbe698230",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/range.js": "558e2aaf47877dec31be94b4b06ecc6e597b36e1c16be55d35d07e60da670271",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/shape.js": "8388f0af15372b79555d701fb61cf634fb2cd29177ff34b6428049cb5b47675e",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/string.js": "89ff88d9c50408f20e6b748db2377aa92685e8120eaa971071841e9c24f9b032",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/traversal.js": "61da3adb66b288a73d45db6348aff8820f8c0dda6893bf3c940dffe767bd1f41",
+    "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/lib/validations/type.js": "5d31a140e3759441cc7ba97a400e03163ab358d5f47aac6b3bbab60334508c6e"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@^1.0.16",
+      "npm:@rdfjs/data-model@^2.1.1",
+      "npm:@rdfjs/dataset@^2.0.2",
+      "npm:@rdfjs/namespace@^2.0.1",
+      "npm:@rdfjs/term-map@^2.0.2",
+      "npm:@rdfjs/term-set@^2.0.3",
+      "npm:@rdfjs/to-ntriples@^3.0.1",
+      "npm:@rdfjs/types@^2.0.1",
+      "npm:@types/rdfjs__data-model@^2.0.9",
+      "npm:@types/rdfjs__dataset@^2.0.7",
+      "npm:@types/rdfjs__namespace@^2.0.10",
+      "npm:@types/rdfjs__term-set@^2.0.9",
+      "npm:grapoi@^1.1.3",
+      "npm:lodash@^4.17.21",
+      "npm:n3@^2.0.1",
+      "npm:rdf-literal@2",
+      "npm:rdf-validation@~0.1.1"
+    ]
+  }
+}
