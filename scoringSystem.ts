@@ -83,26 +83,35 @@ const generateScores = async ({
 
     const sourceShapes = scoreShape.out(source);
 
-    for (const sourceShape of sourceShapes) {
-      try {
+    // Validate all source shapes - they must ALL conform (AND logic)
+    try {
+      let allConform = true;
+
+      for (const sourceShape of sourceShapes) {
         const validationReport = await validator.validate(
           { dataset: dataGraph, terms: [focusNode] },
           [{ terms: [sourceShape.term] }],
         );
 
-        if (!validationReport.conforms) continue;
+        if (!validationReport.conforms) {
+          allConform = false;
+          break;
+        }
+      }
 
+      if (allConform && sourceShapes.ptrs.length > 0) {
         scores.push({
           score,
           type,
           widget,
           source: scoreShape.term,
         });
-      } catch (error) {
-        throw new Error(
-          `Error validating focus node ${focusNode.value} against score shape ${sourceShape.term.value}: ${error}`,
-        );
       }
+    } catch (error) {
+      const firstShape = sourceShapes.ptrs[0]?.term.value || 'unknown';
+      throw new Error(
+        `Error validating focus node ${focusNode.value} against score shape ${firstShape}: ${error}`,
+      );
     }
   }
 

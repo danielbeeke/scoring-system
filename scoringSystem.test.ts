@@ -33,8 +33,6 @@ for await (const entry of Deno.readDir("./tests")) {
       focusNode: shui("data"),
     });
 
-    console.log(scores)
-
     const outcome = scores.map((score) => `${score.widget.value.split("#").pop()} ${score.score} ${score.source.value.split("#").pop()}`).join("\n");
     assertEquals(outcome, Deno.readTextFileSync(`./tests/${entry.name}/outcome.txt`).trim());
   });
