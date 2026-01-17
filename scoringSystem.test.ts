@@ -1,15 +1,10 @@
 import { widgetScoringSystem } from "./scoringSystem.ts";
 import { assertEquals } from "@std/assert";
-import { Parser } from "n3";
 import datasetFactory from "@rdfjs/dataset";
-import { shui } from "./namespaces.ts";
-
-
-const getRdf = async (path: string) => {
-  const parser = new Parser({ format: "text/turtle" });
-  const text = await Deno.readTextFile(path).then((data) => data.toString());
-  return datasetFactory.dataset(parser.parse(text));
-};
+import { shui } from "./helpers/namespaces.ts";
+import { exists } from "@std/fs/exists";
+import { getRdf } from "./helpers/getRdf.ts";
+import { getGeneralScores, scoreShapes } from "./helpers/getGeneralScores.ts";
 
 for await (const entry of Deno.readDir("./tests")) {
   if (!entry.isDirectory) continue;
@@ -17,7 +12,15 @@ for await (const entry of Deno.readDir("./tests")) {
   Deno.test(entry.name, async () => {
     const shapesGraph = await getRdf(`./tests/${entry.name}/shape.ttl`);
     const dataGraph = await getRdf(`./tests/${entry.name}/data.ttl`);
-    const widgetScoresGraph = await getRdf(`./tests/${entry.name}/scores.ttl`);
+    const widgetScoresGraph = datasetFactory.dataset();
+    if (await exists(`./tests/${entry.name}/scores.ttl`)) {
+      const scoreQuads = await getRdf(`./tests/${entry.name}/scores.ttl`);
+      for (const quad of scoreQuads) widgetScoresGraph.add(quad);
+      // Also add the general score shapes so the tests can use them
+      for (const scoreShapesQuad of scoreShapes) widgetScoresGraph.add(scoreShapesQuad);
+    } else {
+      for (const quad of await getGeneralScores()) widgetScoresGraph.add(quad);
+    }
 
     const propertyShapesClosure = await widgetScoringSystem({
       shapesGraph,
@@ -25,11 +28,14 @@ for await (const entry of Deno.readDir("./tests")) {
       propertyShape: shui("shape"),
     });
 
-    const scores = await propertyShapesClosure({ dataGraph, focusNode: shui("data") });
+    const scores = await propertyShapesClosure({
+      dataGraph,
+      focusNode: shui("data"),
+    });
 
-    console.log(scores.filter(score => score.score > 0));
+    console.log(scores)
 
-    const x = 1 + 2;
-    assertEquals(x, 3);
+    const outcome = scores.map((score) => `${score.widget.value.split("#").pop()} ${score.score} ${score.source.value.split("#").pop()}`).join("\n");
+    assertEquals(outcome, Deno.readTextFileSync(`./tests/${entry.name}/outcome.txt`).trim());
   });
 }

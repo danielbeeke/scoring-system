@@ -1,0 +1,182 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX shui: <http://www.w3.org/ns/shacl-ui#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+shui:isBlankNode
+    a sh:NodeShape ;
+    sh:nodeKind sh:BlankNode ;
+.
+
+shui:isBoolean
+    a sh:NodeShape ;
+    sh:datatype xsd:boolean ;
+.
+
+shui:isDate
+    a sh:NodeShape ;
+    sh:datatype xsd:date ;
+.
+
+shui:isDateTime
+    a sh:NodeShape ;
+    sh:datatype xsd:dateTime ;
+.
+
+shui:isIRI
+    a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+.
+
+shui:literalsAllowedAndNoDatatypeSpecified
+    a sh:NodeShape ;
+    sh:property
+        [
+            sh:hasValue sh:Literal ;
+            sh:path sh:nodeKind ;
+        ] ,
+        [
+            sh:maxCount 0 ;
+            sh:path sh:datatype ;
+        ] ;
+.
+
+shui:isNotLiteral
+    a sh:NodeShape ;
+    sh:not [
+        sh:nodeKind sh:Literal ;
+    ] ;
+.
+
+shui:hasInConstraint
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sh:in ;
+        sh:minCount 1 ;
+    ] ;
+.
+
+shui:hasClassConstraint
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sh:class ;
+        sh:minCount 1 ;
+    ] ;
+.
+
+shui:isHTML
+    a sh:NodeShape ;
+    sh:datatype rdf:HTML ;
+.
+
+shui:isSingleLineTrue
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sh:singleLine ;
+        sh:hasValue true ;
+    ] ;
+.
+
+shui:isSingleLineFalse
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sh:singleLine ;
+        sh:hasValue false ;
+    ] ;
+.
+
+shui:isString
+    a sh:NodeShape ;
+    sh:datatype xsd:string ;
+.
+
+shui:permitsString
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sh:datatype ;
+        sh:hasValue xsd:string ;
+    ] ;
+.
+
+shui:hasCustomDatatype
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sh:datatype ;
+        sh:minCount 1 ;
+    ] ;
+    sh:not [
+        sh:property [
+            sh:path sh:datatype ;
+            sh:pattern "^http://www.w3.org/2001/XMLSchema#|^http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
+        ] ;
+    ] ;
+.
+
+shui:isLangString
+    a sh:NodeShape ;
+    sh:datatype rdf:langString ;
+.
+
+shui:permitsLangString
+    a sh:NodeShape ;
+    sh:property [
+        sh:path sh:datatype ;
+        sh:hasValue rdf:langString ;
+    ] ;
+.
+
+shui:isPlainLiteral
+    a sh:NodeShape ;
+    sh:nodeKind sh:Literal ;
+    sh:not [ sh:datatype rdf:langString ] ;
+    sh:not [ sh:datatype xsd:boolean ] ;
+.
+
+shui:permitsLangStringOrString
+    a sh:NodeShape ;
+    sh:or (
+        [
+            sh:property [
+                sh:path sh:datatype ;
+                sh:hasValue rdf:langString
+            ]
+        ]
+        [
+            sh:property [
+                sh:path sh:datatype ;
+                sh:hasValue xsd:string
+            ]
+        ]
+    ) ;
+.
+
+shui:isNotSingleLineFalse
+    a sh:NodeShape ;
+    sh:not shui:isSingleLineFalse ;
+.
+
+shui:hasNoClassConstraint
+    a sh:NodeShape ;
+    sh:not shui:hasClassConstraint ;
+.
+
+shui:isAnyURI
+    a sh:NodeShape ;
+    sh:datatype xsd:anyURI ;
+.
+
+shui:hasImageFileExtension
+    a sh:NodeShape ;
+    sh:property [
+        sh:or (
+            [
+                sh:nodeKind sh:IRI
+            ]
+            [
+                sh:nodeKind sh:Literal
+            ]
+        ) ;
+        sh:pattern "\.(jpg|jpeg|png|gif|bmp|svg|webp|avif)$" ;
+        sh:flags "i" ;
+    ] ;
+.

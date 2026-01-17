@@ -1,8 +1,15 @@
 import grapoi from "grapoi";
 import factory from "@rdfjs/data-model";
 import { Validator } from "shacl-engine";
-import { ExecuteOptions, GenerateScoreOptions, Grapoi, InitializationOptions, WidgetScore } from "./types.ts";
-import { rdf, sh, shui } from "./namespaces.ts";
+import TermMap from "@rdfjs/term-map";
+import {
+  ExecuteOptions,
+  GenerateScoreOptions,
+  Grapoi,
+  InitializationOptions,
+  WidgetScore,
+} from "./types.ts";
+import { rdf, sh, shui, xsd } from "./helpers/namespaces.ts";
 
 // Before we run this function we could prepare the shapesGraph and add property shapes for predicates that do not have a property shape yet.
 // For now one shape per widget score, at a later point those scores can be grouped and resolved to a Property UI Component.
@@ -12,39 +19,45 @@ export async function widgetScoringSystem({
   propertyShape,
 }: InitializationOptions) {
   const pointer = grapoi({ dataset: widgetScoresGraph, factory });
+  const validator = new Validator(widgetScoresGraph, { factory });
 
   const shapeWidgetScores = await generateScores({
     pointer,
     source: shui("shapesGraphShape"),
-    shapesGraph: widgetScoresGraph,
     // Validate the property shapes against the scores.
     dataGraph: shapesGraph,
     focusNode: propertyShape,
+    validator,
   });
 
-  return async function propertyShapesClosure ({
+  return async function propertyShapesClosure({
     dataGraph,
     focusNode,
   }: ExecuteOptions): Promise<WidgetScore[]> {
     const dataWidgetScores = await generateScores({
       pointer,
       source: shui("dataGraphShape"),
-      shapesGraph: widgetScoresGraph,
       // Validate the data against the scores.
       dataGraph,
       focusNode,
+      validator,
     });
 
     return [...shapeWidgetScores, ...dataWidgetScores];
   };
 }
 
+const types = new TermMap([
+  [shui("shapesGraphShape"), "shape"],
+  [shui("dataGraphShape"), "data"],
+]);
+
 const generateScores = async ({
   pointer,
   source,
-  shapesGraph,
   dataGraph,
   focusNode,
+  validator,
 }: GenerateScoreOptions) => {
   const scores: WidgetScore[] = [];
 
@@ -55,34 +68,48 @@ const generateScores = async ({
     .hasOut(rdf("type"), shui("Score"))
     .filter(
       (scoreShape: Grapoi) =>
-        scoreShape.out(sh("deactivated")).term?.value !== "true",
+        !scoreShape
+          .out(sh("deactivated"))
+          .term?.equals(factory.literal("true", xsd("boolean"))),
     );
 
   for (const scoreShape of scoresPointer) {
     const widget = scoreShape.out(shui("widget")).term;
     const score = parseFloat(scoreShape.out(shui("score")).term.value);
-    const type = shui("shapesGraphShape").equals(source) ? "shape" : "data";
+    const type = types.get(source);
 
+    if (!type) throw new Error(`Unknown score type for source ${source.value}`);
     if (!widget || isNaN(score)) continue;
 
     const sourceShapes = scoreShape.out(source);
 
     for (const sourceShape of sourceShapes) {
-      const scoreValidator = new Validator(shapesGraph, { factory });
-      const validationReport = await scoreValidator.validate(
-        { dataset: dataGraph, terms: [focusNode] },
-        [{ terms: [sourceShape.term] }],
-      );
+      try {
+        const validationReport = await validator.validate(
+          { dataset: dataGraph, terms: [focusNode] },
+          [{ terms: [sourceShape.term] }],
+        );
 
-      if (!validationReport.conforms) break;
+        if (!validationReport.conforms) continue;
 
-      scores.push({
-        widget,
-        score,
-        type,
-        propertyShape: scoreShape.term,
-      });
+        scores.push({
+          score,
+          type,
+          widget,
+          source: scoreShape.term,
+        });
+      } catch (error) {
+        throw new Error(
+          `Error validating focus node ${focusNode.value} against score shape ${sourceShape.term.value}: ${error}`,
+        );
+      }
     }
   }
-  return scores;
+
+  return scores.toSorted((a, b) => {
+    if (b.score === a.score) {
+      return a.widget.value.localeCompare(b.widget.value);
+    }
+    return b.score - a.score;
+  });
 };

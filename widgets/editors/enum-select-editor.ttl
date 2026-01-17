@@ -1,0 +1,13 @@
+PREFIX shui: <http://www.w3.org/ns/shacl-ui#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+shui:enumSelectEditorScore10
+    a shui:WidgetScore ;
+    shui:score 10 ;
+    shui:shapeGraphShape shui:hasInConstraint ;
+    shui:noDataOrDataValidates true ; # A new predicate to require that the given value nodes validates against the shape.
+    # Required to check if the provided value is within the enum.
+    # If it is not in the enum we could go into repair mode and
+    # show the value node with whatever widget is able to render the value and show the validation error.
+    shui:widget shui:EnumSelectEditor ;
+.

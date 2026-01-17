@@ -1,0 +1,3 @@
+TextFieldWithLangEditor 5 TextFieldEditorScore5
+TextFieldEditor 10 TextFieldEditorScore10
+TextFieldEditor 10 TextFieldEditorScore10
