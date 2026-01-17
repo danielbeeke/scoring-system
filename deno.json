@@ -18,7 +18,7 @@
     "n3": "npm:n3@^2.0.1",
     "rdf-literal": "npm:rdf-literal@^2.0.0",
     "rdf-validation": "npm:rdf-validation@^0.1.1",
-    "shacl-engine-online": "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/index.js",
-    "shacl-engine": "file:/home/daniel/Development/shacl-engine/index.js"
+    "shacl-engine": "https://raw.githubusercontent.com/danielbeeke/shacl-engine/master/index.js",
+    "shacl-engine-local": "file:/home/daniel/Development/shacl-engine/index.js"
   }
 }
