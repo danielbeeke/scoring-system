@@ -1,7 +1,8 @@
-import { shui, widgetScoringSystem } from "./scoringSystem.ts";
+import { widgetScoringSystem } from "./scoringSystem.ts";
 import { assertEquals } from "@std/assert";
 import { Parser } from "n3";
 import datasetFactory from "@rdfjs/dataset";
+import { shui } from "./namespaces.ts";
 
 
 const getRdf = async (path: string) => {
